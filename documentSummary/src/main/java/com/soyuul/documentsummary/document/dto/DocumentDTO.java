@@ -1,4 +1,4 @@
-package com.soyuul.documentsummary.dto.document;
+package com.soyuul.documentsummary.document.dto;
 
 import java.time.LocalDateTime;
 
