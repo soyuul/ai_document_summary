@@ -1,0 +1,77 @@
+# =========================
+# 프로젝트 기본 파일
+# =========================
+HELP.md
+
+# =========================
+# Gradle 관련
+# =========================
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# =========================
+# Spring STS (Spring Tool Suite)
+# =========================
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# =========================
+# IntelliJ IDEA 관련
+# =========================
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+# =========================
+# NetBeans 관련
+# =========================
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# =========================
+# VS Code 관련
+# =========================
+.vscode/
+
+# =========================
+# Java & OS 관련
+# =========================
+*.class
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# =========================
+# 환경/보안 관련 설정
+# =========================
+# 실제 비밀번호가 담기는 설정은 Git에 올리지 말 것
+application.yml
+application.properties
+
+# 예시용 설정파일은 올려도 됨
+!application-template.yml
+
+# =========================
+# 기타
+# =========================
+target/
