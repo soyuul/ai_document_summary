@@ -2,7 +2,7 @@ package com.soyuul.documentsummary.entity.document;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +23,7 @@ public class TblDocument {
     @Column(name = "file_path", nullable = false)
     private String filePath;
 
-    @CreationTimestamp  //  자동으로 시간 입력 가능
+    @UpdateTimestamp  //  자동으로 시간 입력 가능
     @Column(name = "uploaded_at", nullable = false)
     private LocalDateTime uploadedAt;
 
