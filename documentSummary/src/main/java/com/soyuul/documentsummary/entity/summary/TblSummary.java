@@ -26,16 +26,15 @@ public class TblSummary {
     @Column(name = "keyword")
     private String keyword;
 
-    @Lob
-    @Column(name = "summary_content", nullable = false)
+//    @Lob : TEXT 타입으로 사용했는데 Hibernate가 oid로 매핑하는 오류
+    @Column(name = "summary_content", columnDefinition = "TEXT", nullable = false)
     private String summaryContent;
 
     @CreationTimestamp
     @Column(name = "summary_created_at", nullable = false)
     private LocalDateTime summaryCreatedAt;
 
-    @Lob
-    @Column(name = "section_reference")
+    @Column(name = "section_reference", columnDefinition = "TEXT")
     private String sectionReference;
 
     public TblSummary() {

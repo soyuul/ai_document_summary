@@ -22,14 +22,14 @@ import java.util.concurrent.TimeUnit;
 public class WebConfiguration implements WebMvcConfigurer {
 
     //  사용자 업로드 파일 경로
-    private static final String USER_UPLOAD_HANDLER = "/summaryfiles/**";
+    private static final String USER_UPLOAD_HANDLER = "/static/summaryfiles/**";
     private static final String USER_UPLOAD_LOCATION =
             "file:" + System.getProperty("user.dir") + "/summaryfiles/";
 
     //  프로젝트 리소스 이미지 경로
-    private static final String STATIC_IMAGE_HANDLER = "/summaryimages/**";
+    private static final String STATIC_IMAGE_HANDLER = "/static/summaryimages/**";
     private static final String STATIC_IMAGE_LOCATION =
-            "classpath:/summaryimages/";
+            "classpath:/static/summaryimages/";
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry){
