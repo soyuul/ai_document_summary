@@ -20,7 +20,7 @@ public class TblSummary {
 //    연관 관계 매칭 어노테이션이라 기본 타입 필드에서 사용하는 어노테이션을 사용하면 안된다
 //    @Column(name = "document_id", nullable = false)
     @JoinColumn(name = "document_id", nullable = false)
-    private TblDocument Document;
+    private TblDocument document;
 
     @Size(max = 255)
     @Column(name = "keyword")
@@ -42,7 +42,7 @@ public class TblSummary {
 
     public TblSummary(Long summaryId, TblDocument document, String keyword, String summaryContent, LocalDateTime summaryCreatedAt, String sectionReference) {
         this.summaryId = summaryId;
-        Document = document;
+        this.document = document;
         this.keyword = keyword;
         this.summaryContent = summaryContent;
         this.summaryCreatedAt = summaryCreatedAt;

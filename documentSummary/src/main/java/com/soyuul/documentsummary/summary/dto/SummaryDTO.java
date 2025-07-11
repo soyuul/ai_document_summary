@@ -14,7 +14,7 @@ public class SummaryDTO {
     public SummaryDTO() {
     }
 
-    public SummaryDTO(Long summaryId, Long documentId, String keyword, String summaryContent, LocalDateTime summaryCreateAt, String sectionReference) {
+    public SummaryDTO(Long summaryId, Long documentId, String keyword, String summaryContent, LocalDateTime summaryCreatedAt, String sectionReference) {
         this.summaryId = summaryId;
         this.documentId = documentId;
         this.keyword = keyword;
@@ -55,12 +55,12 @@ public class SummaryDTO {
         this.summaryContent = summaryContent;
     }
 
-    public LocalDateTime summaryCreatedAt() {
+    public LocalDateTime getSummaryCreatedAt() {
         return summaryCreatedAt;
     }
 
-    public void summaryCreatedAt(LocalDateTime summaryCreateAt) {
-        this.summaryCreatedAt = summaryCreateAt;
+    public void setSummaryCreatedAt(LocalDateTime summaryCreatedAt) {
+        this.summaryCreatedAt = summaryCreatedAt;
     }
 
     public String getSectionReference() {
