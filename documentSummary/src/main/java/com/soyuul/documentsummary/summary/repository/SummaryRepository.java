@@ -1,4 +1,4 @@
-package com.soyuul.documentsummary.summary.dao;
+package com.soyuul.documentsummary.summary.repository;
 
 import com.soyuul.documentsummary.entity.summary.TblSummary;
 import org.springframework.data.jpa.repository.JpaRepository;
