@@ -119,7 +119,7 @@ public class FileUploadUtils {
             Path filePath = uploadPath.resolve(replaceFilename);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         }catch(IOException ex){
-            throw new IOException("파일이 저장을 실패: " + fileName, ex);
+            throw new IOException("파일 저장 실패: " + fileName, ex);
         }
 
 
