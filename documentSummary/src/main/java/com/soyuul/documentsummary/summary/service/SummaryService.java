@@ -169,4 +169,39 @@ public class SummaryService {
     }
 
 
+    @Transactional
+    public Object updateSummary(Long summaryId, SummaryDTO dto) {
+
+        log.info("[SummaryService] updateSummary start...");
+        log.info("[SummaryService] summaryId : {}", summaryId);
+
+        TblSummary summary = summaryRepository.findById(summaryId)
+                .orElseThrow(() -> new NoSuchElementException("해당 ID가 존재하지 않습니다 : " + summaryId));
+
+        summary.setKeyword(dto.getKeyword());
+        summary.setSummaryContent(dto.getSummaryContent());
+        summary.setSectionReference(dto.getSectionReference());
+
+        return modelMapper.map(summary, SummaryDTO.class);
+
+    }
+
+
+    @Transactional
+    public void deleteSummary(Long summaryId) {
+        log.info("[SummaryService] deleteSummary start...");
+        log.info("[SummaryService] summaryId : {}", summaryId);
+
+        /*
+        * deleteById 말고 findById를 사용하는 이유
+        * - 삭제 전 존재 여부 확인 가능
+        * - 추가 로직 삽입 가능 (로그, 연관파일 삭제, 연관 데이터 삭제 등)
+        * */
+
+        TblSummary summary = summaryRepository.findById(summaryId)
+                .orElseThrow(() -> new NoSuchElementException("해당 ID가 존재하지 않습니다 : " + summaryId));
+
+        summaryRepository.delete(summary);
+    }
+
 }

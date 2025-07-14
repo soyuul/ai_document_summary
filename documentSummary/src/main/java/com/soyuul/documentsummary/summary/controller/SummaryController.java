@@ -59,5 +59,26 @@ public class SummaryController {
     }
 
 
+    @Operation(summary = "문서 요약 수정 요청", description = "문서에 대한 요약 수정이 진행됩니다.", tags = {"SummaryController"})
+    @PutMapping("/update/{summaryId}")
+    public ResponseEntity<ResponseDTO> updateSummary(@PathVariable("summaryId") Long summaryId,
+                                                     @RequestBody SummaryDTO dto) {
+
+        log.info("[SummaryController] updateSummary start...");
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 수정 성공", summaryService.updateSummary(summaryId, dto)));
+    }
+
+
+    @Operation(summary = "문서 요약 삭제", description = "문서에 대한 요약 삭제가 진행됩니다.", tags = {"SummaryController"})
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDTO> deleteSummary(@RequestParam("summaryId") Long summaryId){
+
+        log.info("[SummaryController] deleteSummary start...");
+
+        summaryService.deleteSummary(summaryId);
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 삭제 성공", null));
+    }
 
 }
