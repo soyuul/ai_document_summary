@@ -39,6 +39,25 @@ public class SummaryService {
         this.modelMapper = modelMapper;
     }
 
+
+    public Object findListSummary() {
+        log.info("[SummaryService] findListSummary start...");
+
+        List<TblSummary> summaryList = summaryRepository.findAll();
+
+        /*
+         * 단일 객체를 변환하는 메서드
+         * */
+//        SummaryDTO res = modelMapper.map(summaryList, SummaryDTO.class);
+
+        List<SummaryDTO> res = summaryList.stream()
+                .map(summary -> modelMapper.map(summary, SummaryDTO.class))
+                .toList();
+
+        return res;
+    }
+
+
     @Transactional
     public Object saveSummary(MultipartFile file, String keyword) throws IOException {
         log.info("[SummaryService] saveSummary Transactional start...");
@@ -125,4 +144,5 @@ public class SummaryService {
         return res;
 
     }
+
 }

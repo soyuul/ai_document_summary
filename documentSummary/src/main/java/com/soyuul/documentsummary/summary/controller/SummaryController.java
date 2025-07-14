@@ -28,6 +28,16 @@ public class SummaryController {
     }
 
 
+    @Operation(summary = "문서 요약 리스트 전체 조회", description = "문서에 대한 요약 리스트 전체 조회가 진행됩니다.", tags = {"SummaryController"})
+    @GetMapping("/list")
+    public ResponseEntity<ResponseDTO> findListSummary(){
+
+        log.info("[SummaryController] findListSummary start...");
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 리스트 전체 조회 성공", summaryService.findListSummary()));
+    }
+
+
     @Operation(summary = "문서 요약 등록 요청", description = "문서에 대한 요약 등록이 진행됩니다.", tags = {"SummaryController"})
     @PostMapping("")
     public ResponseEntity<ResponseDTO> saveSummary(@RequestParam("file") MultipartFile file,
@@ -37,5 +47,7 @@ public class SummaryController {
 
         return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 저장 성공", summaryService.saveSummary(file, keyword)));
     }
+
+
 
 }
