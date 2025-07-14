@@ -38,6 +38,16 @@ public class SummaryController {
     }
 
 
+    @Operation(summary = "문서 요약 상세 조회", description = "문서에 대한 요약 상세 조회가 진행됩니다.", tags = {"SummaryController"})
+    @GetMapping("/list/{summaryId}")
+    public ResponseEntity<ResponseDTO> findSummaryDetail(@PathVariable("summaryId") Long summaryId){
+
+        log.info("[SummaryController] findSummary start...");
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 상세 조회 성공", summaryService.findSummaryDetail(summaryId)));
+    }
+
+
     @Operation(summary = "문서 요약 등록 요청", description = "문서에 대한 요약 등록이 진행됩니다.", tags = {"SummaryController"})
     @PostMapping("")
     public ResponseEntity<ResponseDTO> saveSummary(@RequestParam("file") MultipartFile file,

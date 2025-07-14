@@ -20,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class SummaryService {
@@ -54,6 +55,28 @@ public class SummaryService {
                 .map(summary -> modelMapper.map(summary, SummaryDTO.class))
                 .toList();
 
+        return res;
+    }
+
+
+    public Object findSummaryDetail(Long summaryId) {
+        log.info("[SummaryService] findSummaryDetail start...");
+        log.info("summaryId : {}", summaryId);
+
+        /*
+        * findById(summaryId)는 Optional<T>를 반환
+        * */
+//        TblSummary summary = summaryRepository.findById(summaryId);   //  컴페일 에러 발생
+
+        /*
+        * Optional 예외 처리 코드
+        * summaryRepository.findById(summaryId) : 이 메서드는 리턴값이 Optional<TblSummary> 즉, 값이 없을 수도 있다.
+        * .orElseThrow(...) : 값이 없을 경우 예외를 던지라는 의미
+        * */
+        TblSummary summary = summaryRepository.findById(summaryId)
+                .orElseThrow(() -> new NoSuchElementException("ID가 존재하지 않습니다: " + summaryId));
+
+        SummaryDTO res = modelMapper.map(summary, SummaryDTO.class);
         return res;
     }
 
@@ -144,5 +167,6 @@ public class SummaryService {
         return res;
 
     }
+
 
 }
