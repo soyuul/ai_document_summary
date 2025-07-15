@@ -10,12 +10,15 @@ import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -81,11 +84,24 @@ public class SummaryService {
     }
 
 
+    public Resource downloadSummary(String filename) throws IOException  {
+        log.info("[SummaryService] downloadSummary start...");
+
+        Path filePath = Paths.get(FILE_DIR).resolve(filename);
+
+        if(!Files.exists(filePath)){
+            throw new FileNotFoundException("파일이 존재하지 않습니다: " + filename);
+        }
+
+        return new UrlResource(filePath.toUri());
+    }
+
+
     @Transactional
     public Object saveSummary(MultipartFile file, String keyword) throws IOException {
         log.info("[SummaryService] saveSummary Transactional start...");
-        log.info("[SummaryService] summary file : {}", file);
-        log.info("[SummaryService] summary keyword : {}", keyword);
+        log.info("summary file : {}", file);
+        log.info("summary keyword : {}", keyword);
 
 //      1. 파일 저장
         /*파일 경로 지정 (.yml에 지정된 경로)*/
@@ -173,7 +189,7 @@ public class SummaryService {
     public Object updateSummary(Long summaryId, SummaryDTO dto) {
 
         log.info("[SummaryService] updateSummary start...");
-        log.info("[SummaryService] summaryId : {}", summaryId);
+        log.info("summaryId : {}", summaryId);
 
         TblSummary summary = summaryRepository.findById(summaryId)
                 .orElseThrow(() -> new NoSuchElementException("해당 ID가 존재하지 않습니다 : " + summaryId));
@@ -190,7 +206,7 @@ public class SummaryService {
     @Transactional
     public void deleteSummary(Long summaryId) {
         log.info("[SummaryService] deleteSummary start...");
-        log.info("[SummaryService] summaryId : {}", summaryId);
+        log.info("summaryId : {}", summaryId);
 
         /*
         * deleteById 말고 findById를 사용하는 이유
