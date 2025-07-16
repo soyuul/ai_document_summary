@@ -87,12 +87,21 @@ public class SummaryService {
     public Resource downloadSummary(String filename) throws IOException  {
         log.info("[SummaryService] downloadSummary start...");
 
+        /*
+        * .yml 에서 설정한 경로와 전달받은 파일 이름을 조합해 실제 정장된 파일의 경로를 만든다.
+        * */
         Path filePath = Paths.get(FILE_DIR).resolve(filename);
 
+        /*
+        * 만약 같은 이름의 파일이 없으면 "파일이 존재하지 않습니다 파일명" 예외 발생
+        * */
         if(!Files.exists(filePath)){
             throw new FileNotFoundException("파일이 존재하지 않습니다: " + filename);
         }
 
+        /*
+        * 파일이 존재하면 해당 경로를 기반으로 UrlResource 객체 생성 (실제 파일의 URL을 리소스로 반환)
+        * */
         return new UrlResource(filePath.toUri());
     }
 
