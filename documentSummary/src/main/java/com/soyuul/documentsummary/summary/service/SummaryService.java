@@ -1,9 +1,9 @@
 package com.soyuul.documentsummary.summary.service;
 
-import com.soyuul.documentsummary.document.dto.DocumentDTO;
 import com.soyuul.documentsummary.document.repository.DocumentRepository;
 import com.soyuul.documentsummary.entity.document.TblDocument;
 import com.soyuul.documentsummary.entity.summary.TblSummary;
+import com.soyuul.documentsummary.openAi.service.OpenAIService;
 import com.soyuul.documentsummary.summary.dto.SummaryDTO;
 import com.soyuul.documentsummary.summary.repository.SummaryRepository;
 import com.soyuul.documentsummary.util.PdfUtils;
@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -30,18 +31,18 @@ public class SummaryService {
     private static final Logger log = LoggerFactory.getLogger(SummaryService.class);
 
     private final SummaryRepository summaryRepository;
-    private final DocumentRepository documentRepository;
+    private final OpenAIService openAIService;
     private final ModelMapper modelMapper;
 
     @Value("${file.upload.path.summary-files}")
     private String FILE_DIR;
 
-    public SummaryService(SummaryRepository summaryRepository, DocumentRepository documentRepository, ModelMapper modelMapper) {
+    @Autowired
+    public SummaryService(SummaryRepository summaryRepository, OpenAIService openAIService, ModelMapper modelMapper) {
         this.summaryRepository = summaryRepository;
-        this.documentRepository = documentRepository;
+        this.openAIService = openAIService;
         this.modelMapper = modelMapper;
     }
-
 
     public Object findListSummary() {
         log.info("[SummaryService] findListSummary start...");

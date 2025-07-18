@@ -44,6 +44,9 @@ dependencies {
 
     /*PDF를 읽기 위한 PDFBox*/
     implementation 'org.apache.pdfbox:pdfbox:2.0.29'
+
+    /*OpenAI API를 위한 JSON 객체 변환 도구 의존성*/
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
 }
 
 tasks.named('test') {
