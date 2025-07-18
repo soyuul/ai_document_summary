@@ -36,7 +36,7 @@ public class DocumentService {
 
 
     @Transactional
-    public DocumentDTO saveDocument(MultipartFile file) {
+    public DocumentDTO saveDocument(MultipartFile file) { 
 
         log.info("[DocumentService] saveDocument Transactional start...");
         log.info("document file : {}", file);
