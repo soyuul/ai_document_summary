@@ -2,6 +2,7 @@ package com.soyuul.documentsummary.summary.service;
 
 import com.soyuul.documentsummary.document.dto.DocumentDTO;
 import com.soyuul.documentsummary.document.repository.DocumentRepository;
+import com.soyuul.documentsummary.entity.document.TblDocument;
 import com.soyuul.documentsummary.entity.summary.TblSummary;
 import com.soyuul.documentsummary.summary.dto.SummaryDTO;
 import com.soyuul.documentsummary.summary.repository.SummaryRepository;
@@ -105,14 +106,27 @@ public class SummaryService {
 
 
     @Transactional
-    public Object saveSummary(DocumentDTO dto, String keyword) throws IOException {
+    public Object saveSummary(TblDocument document, String keyword) throws IOException {
         log.info("[SummaryService] saveSummary Transactional start...");
         log.info("summary keyword : {}", keyword);
 
 //      1. 저장된 파일 경로로부터 텍스트 추출
-        Path path = Paths.get(FILE_DIR, dto.getFilePath());
+        Path path = Paths.get(FILE_DIR, document.getFilePath());
         String text = PdfUtils.extractTextFromPdf(path);
-        return "";
+
+//      2. OpenAI API 호출해 요약 생성
+        String summaryContent = openAIService.summarizeText(text, keyword);
+
+//      3. 요약 DB에 저장
+        TblSummary summary = new TblSummary();
+        summary.setDocument(document);
+        summary.setKeyword(keyword);
+        summary.setSummaryContent(summaryContent);
+        summary.setSectionReference(null);
+
+        summaryRepository.save(summary);
+
+        return modelMapper.map(summary, TblSummary.class);
     }
 
 

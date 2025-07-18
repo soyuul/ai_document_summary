@@ -2,6 +2,7 @@ package com.soyuul.documentsummary.summary.controller;
 
 import com.soyuul.documentsummary.common.ResponseDTO;
 import com.soyuul.documentsummary.document.dto.DocumentDTO;
+import com.soyuul.documentsummary.entity.document.TblDocument;
 import com.soyuul.documentsummary.summary.dto.SummaryDTO;
 import com.soyuul.documentsummary.summary.service.SummaryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -77,12 +78,12 @@ public class SummaryController {
 
 
     @Operation(summary = "문서 요약 등록 요청", description = "문서에 대한 요약 등록이 진행됩니다.", tags = {"SummaryController"})
-    @PostMapping("/insert")
-    public ResponseEntity<ResponseDTO> saveSummary(@RequestBody DocumentDTO dto,
+    @PostMapping("")
+    public ResponseEntity<ResponseDTO> saveSummary(@RequestBody TblDocument document,
                                                    @RequestParam(value = "keyword", required = false) String keyword) throws IOException {
         log.info("[SummaryController] saveSummary start...");
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 저장 성공", summaryService.saveSummary(dto, keyword)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 저장 성공", summaryService.saveSummary(document, keyword)));
     }
 
 
