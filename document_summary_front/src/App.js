@@ -1,10 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "./layouts/Layout";
+import Main from "./pages/Main";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<div>여기는 메인입니다.</div> }/>
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<Main/>}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   );

@@ -1,10 +1,21 @@
 package com.soyuul.documentsummary.document.service;
 
+import com.soyuul.documentsummary.document.dto.DocumentDTO;
 import com.soyuul.documentsummary.document.repository.DocumentRepository;
+import com.soyuul.documentsummary.entity.document.TblDocument;
+import com.soyuul.documentsummary.summary.dto.SummaryDTO;
+import com.soyuul.documentsummary.util.FileUploadUtils;
+import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.swing.text.Document;
+import java.io.IOException;
 
 @Service
 public class DocumentService {
@@ -12,9 +23,62 @@ public class DocumentService {
     private static final Logger log = LoggerFactory.getLogger(DocumentService.class);
 
     private final DocumentRepository documentRepository;
+    private final ModelMapper modelMapper;
+
+    @Value("${file.upload.path.summary-files}")
+    private String FILE_DIR;
 
     @Autowired
-    public DocumentService(DocumentRepository documentRepository) {
+    public DocumentService(DocumentRepository documentRepository, ModelMapper modelMapper) {
         this.documentRepository = documentRepository;
+        this.modelMapper = modelMapper;
+    }
+
+
+    @Transactional
+    public DocumentDTO saveDocument(MultipartFile file) {
+
+        log.info("[DocumentService] saveDocument Transactional start...");
+        log.info("document file : {}", file);
+
+        //      1. 파일 저장
+        /*파일 경로 지정 (.yml에 지정된 경로)*/
+        String uploadPath = FILE_DIR;
+
+        String savedFileName;
+        try{
+            /*
+             * FileUploadUtils.saveFile()
+             * - uploadPath : 실제 저장될 경로
+             * - file.getOriginalFilename() : 사용자가 업로드한 파일명
+             * - file : 업로드된 MultipartFile 객체
+             *
+             * => 파일이 없으면 디렉토리 생성, 고유한 파일명으로 저장
+             * */
+            savedFileName = FileUploadUtils.saveFile(uploadPath, file.getOriginalFilename(), file);
+        }catch (IOException ex){
+            throw new RuntimeException("파일 저장 실패", ex);
+        }
+
+        //      2. TblDocument 생성 → 저장
+        /*
+         * TblDocument 생성
+         * setDocumentTitle() : file에 원래 이름 저장
+         * setFilePath() : 경로 새로 저장
+         * */
+        TblDocument document = new TblDocument();
+        document.setDocumentTitle(file.getOriginalFilename());
+        document.setFilePath(savedFileName);
+
+        /*
+         * TblDocument에 새로 등록된 내용 저장
+         * */
+        TblDocument saveDocument = documentRepository.save(document);
+
+        log.info("Document 저장 완료 : {}", saveDocument.getDocumentId());
+
+        DocumentDTO res = modelMapper.map(saveDocument, DocumentDTO.class);
+        return res;
+
     }
 }

@@ -76,7 +76,7 @@ public class SummaryController {
 
 
     @Operation(summary = "문서 요약 등록 요청", description = "문서에 대한 요약 등록이 진행됩니다.", tags = {"SummaryController"})
-    @PostMapping("")
+    @PostMapping("/insert")
     public ResponseEntity<ResponseDTO> saveSummary(@RequestParam("file") MultipartFile file,
                                                    @RequestParam(value = "keyword", required = false) String keyword) throws IOException {
         log.info("[SummaryController] saveSummary start...");
