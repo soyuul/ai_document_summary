@@ -35,7 +35,7 @@ public class DocumentController {
     public ResponseEntity<ResponseDTO> saveDocument(@RequestParam("file") MultipartFile file) throws IOException {
         log.info("[DocumentController] saveDocument start...");
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 저장 성공", documentService.saveDocument(file)));
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "문서 저장 성공", documentService.saveDocument(file)));
     }
 
 }
