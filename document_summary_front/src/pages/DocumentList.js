@@ -92,10 +92,7 @@ function DocumentList() {
       </tbody>
       </table>
 
-      <div
-        className={pagiNation.pagination}
-        style={{ position: 'absolute', bottom: '50px', left: '200px' }}
-      >
+      <div className={pagiNation.pagination}>
         {pageNumbers.map(number => (
           <button key={number} onClick={() => setCurrentPage(number)}>
             {number}

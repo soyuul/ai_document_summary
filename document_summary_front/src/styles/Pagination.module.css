@@ -3,6 +3,9 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  position: fixed;
+  bottom: 230px;
+  left: 880px;
 }
 
 /* 각 페이지 버튼 */
