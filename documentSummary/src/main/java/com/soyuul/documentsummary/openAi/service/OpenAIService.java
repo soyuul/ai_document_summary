@@ -60,6 +60,10 @@ public class OpenAIService {
                 prompt = "다음 문서를 200자 이내로 요약해줘:\n" + text;
             }
 
+            /*
+            * OpenAI Chat API에서 요구하는 포맷
+            * role : system / user / assistant => 이 중 user만 사용
+            * */
             List<Map<String, String>> messages = new ArrayList<>();
             messages.add(Map.of(
                     "role", "user",

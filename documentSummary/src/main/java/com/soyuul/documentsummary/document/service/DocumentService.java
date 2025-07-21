@@ -103,5 +103,15 @@ public class DocumentService {
         }catch (IOException e){
             throw new RuntimeException("문서 파일을 읽는데 실패했습니다. 경로: " + path, e);
         }
+
+//        String filePath = document.getFilePath();
+//
+//        if (filePath.endsWith(".pdf")) {
+//            return PdfUtils.extractTextFromPdf(Paths.get(filePath));
+//        } else if (filePath.endsWith(".txt")) {
+//            return TxtUtils.extractTextFromTxt(Paths.get(filePath));
+//        } else {
+//            throw new IllegalArgumentException("지원하지 않는 파일 형식입니다: " + filePath);
+//        }
     }
 }

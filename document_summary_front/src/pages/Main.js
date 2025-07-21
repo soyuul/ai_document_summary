@@ -1,10 +1,12 @@
 import React from 'react'
-import SummaryUploadForm from '../components/summary/SummaryUploadForm'
+import DocumentUploadForm from '../components/files/DocumentUploadForm';
+// import SummaryUploadForm from '../components/summary/SummaryUploadForm';
 
 function Main() {
   return (
     <>
-      <SummaryUploadForm/>
+      {/* <SummaryUploadForm/> */}
+      <DocumentUploadForm/>
     </>
   )
 }
