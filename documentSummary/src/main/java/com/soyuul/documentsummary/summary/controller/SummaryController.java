@@ -2,7 +2,9 @@ package com.soyuul.documentsummary.summary.controller;
 
 import com.soyuul.documentsummary.common.ResponseDTO;
 import com.soyuul.documentsummary.document.dto.DocumentDTO;
+import com.soyuul.documentsummary.document.service.DocumentService;
 import com.soyuul.documentsummary.entity.document.TblDocument;
+import com.soyuul.documentsummary.openAi.service.OpenAIService;
 import com.soyuul.documentsummary.summary.dto.SummaryDTO;
 import com.soyuul.documentsummary.summary.service.SummaryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,10 +30,14 @@ public class SummaryController {
     private static final Logger log = LoggerFactory.getLogger(SummaryController.class);
 
     private final SummaryService summaryService;
+    private final DocumentService documentService;
+    private final OpenAIService openAIService;
 
     @Autowired
-    public SummaryController(SummaryService summaryService) {
+    public SummaryController(SummaryService summaryService, DocumentService documentService, OpenAIService openAIService) {
         this.summaryService = summaryService;
+        this.documentService = documentService;
+        this.openAIService = openAIService;
     }
 
 
@@ -77,15 +83,24 @@ public class SummaryController {
     }
 
 
+
     @Operation(summary = "문서 요약 등록 요청", description = "문서에 대한 요약 등록이 진행됩니다.", tags = {"SummaryController"})
     @PostMapping("")
-    public ResponseEntity<ResponseDTO> saveSummary(@RequestBody TblDocument document,
+    public ResponseEntity<ResponseDTO> saveSummary(@RequestParam("documentId") Long documentId,
                                                    @RequestParam(value = "keyword", required = false) String keyword) throws IOException {
         log.info("[SummaryController] saveSummary start...");
+//
+//        try{
+//            TblDocument document = documentService.findDocumentById(documentId);
+//            Object summary = summaryService.saveSummary(document, keyword);
+//            return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 성공", summary));
+//        }catch (Exception e){
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "요약 실패", e.getMessage()));
+//        }
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 저장 성공", summaryService.saveSummary(documentId, keyword)));
 
-        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "요약 저장 성공", summaryService.saveSummary(document, keyword)));
     }
-
 
     @Operation(summary = "문서 요약 수정 요청", description = "문서에 대한 요약 수정이 진행됩니다.", tags = {"SummaryController"})
     @PutMapping("/update/{summaryId}")

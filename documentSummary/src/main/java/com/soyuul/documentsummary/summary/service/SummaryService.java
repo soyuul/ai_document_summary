@@ -1,6 +1,7 @@
 package com.soyuul.documentsummary.summary.service;
 
 import com.soyuul.documentsummary.document.repository.DocumentRepository;
+import com.soyuul.documentsummary.document.service.DocumentService;
 import com.soyuul.documentsummary.entity.document.TblDocument;
 import com.soyuul.documentsummary.entity.summary.TblSummary;
 import com.soyuul.documentsummary.openAi.service.OpenAIService;
@@ -33,15 +34,17 @@ public class SummaryService {
     private final SummaryRepository summaryRepository;
     private final OpenAIService openAIService;
     private final ModelMapper modelMapper;
+    private final DocumentService documentService;
 
     @Value("${file.upload.path.summary-files}")
     private String FILE_DIR;
 
     @Autowired
-    public SummaryService(SummaryRepository summaryRepository, OpenAIService openAIService, ModelMapper modelMapper) {
+    public SummaryService(SummaryRepository summaryRepository, OpenAIService openAIService, ModelMapper modelMapper, DocumentService documentService) {
         this.summaryRepository = summaryRepository;
         this.openAIService = openAIService;
         this.modelMapper = modelMapper;
+        this.documentService = documentService;
     }
 
     public Object findListSummary() {
@@ -107,18 +110,25 @@ public class SummaryService {
 
 
     @Transactional
-    public Object saveSummary(TblDocument document, String keyword) throws IOException {
+    public Object saveSummary(Long documentId,
+                              String keyword) throws IOException {
         log.info("[SummaryService] saveSummary Transactional start...");
+        log.info("summary documentId : {}", documentId);
         log.info("summary keyword : {}", keyword);
 
-//      1. 저장된 파일 경로로부터 텍스트 추출
-        Path path = Paths.get(FILE_DIR, document.getFilePath());
-        String text = PdfUtils.extractTextFromPdf(path);
+//      1. 문서 조회
+        TblDocument document = documentService.findDocumentById(documentId);
+        log.info("document : {}", document);
 
-//      2. OpenAI API 호출해 요약 생성
+//      2. 텍스트 추출
+        String text = documentService.loadTextByDocument(document);
+        log.info("text : {}", text);
+
+//      3. OpenAI API 호출해 요약 생성
         String summaryContent = openAIService.summarizeText(text, keyword);
+        log.info("summaryContent : {}", summaryContent);
 
-//      3. 요약 DB에 저장
+//      4. 요약 DB에 저장
         TblSummary summary = new TblSummary();
         summary.setDocument(document);
         summary.setKeyword(keyword);
@@ -127,7 +137,7 @@ public class SummaryService {
 
         summaryRepository.save(summary);
 
-        return modelMapper.map(summary, TblSummary.class);
+        return summary;
     }
 
 

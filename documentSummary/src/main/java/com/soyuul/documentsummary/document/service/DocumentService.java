@@ -16,6 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.swing.text.Document;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class DocumentService {
@@ -80,5 +84,24 @@ public class DocumentService {
         DocumentDTO res = modelMapper.map(saveDocument, DocumentDTO.class);
         return res;
 
+    }
+
+    public TblDocument findDocumentById(Long documentId){
+//        DB에서 document 조회
+        return documentRepository.findById(documentId)
+                .orElseThrow(() -> new IllegalArgumentException(("해당 문서를 찾을 수 없습니다. ID: "+ documentId)));
+    }
+
+    public String loadTextByDocument(TblDocument document){
+
+//        파일 경로 읽기
+        Path path = Paths.get(FILE_DIR, document.getFilePath());
+
+//        파일에서 텍스트 읽기
+        try{
+            return Files.readString(path, StandardCharsets.UTF_8);
+        }catch (IOException e){
+            throw new RuntimeException("문서 파일을 읽는데 실패했습니다. 경로: " + path, e);
+        }
     }
 }
