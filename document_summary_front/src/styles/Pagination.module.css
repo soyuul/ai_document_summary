@@ -1,0 +1,27 @@
+/* 페이지네이션 버튼 영역 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* 각 페이지 버튼 */
+.pagination button {
+  margin: 0 4px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #eee;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pagination button:hover {
+  background-color: #ccc;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
