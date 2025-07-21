@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { callSaveSummary } from '../../apis/SummaryAPICalls';
+import { callSaveSummary } from '../../../apis/SummaryAPICalls';
 
 function SummaryUploadForm() {
     const dispatch = useDispatch();

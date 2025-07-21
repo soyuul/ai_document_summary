@@ -8,10 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -27,6 +24,15 @@ public class DocumentController {
     @Autowired
     public DocumentController(DocumentService documentService) {
         this.documentService = documentService;
+    }
+
+
+    @Operation(summary = "전체 문서 조회 요청", description = "저장된 전체 문서 조회가 진행됩니다.", tags = {"DocumentController"})
+    @GetMapping("/list")
+    public ResponseEntity<ResponseDTO> documentListAll() {
+        log.info("[DocumentController] documentListAll start...");
+
+        return ResponseEntity.ok().body(new ResponseDTO(HttpStatus.OK, "전체 문서 조회 성공", documentService.documentListAll()));
     }
 
 

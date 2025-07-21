@@ -39,6 +39,15 @@ public class DocumentService {
     }
 
 
+//    저장된 문서 전체 조회
+    public Object documentListAll() {
+        log.info("[DocumentService] documentListAll start...");
+
+        return documentRepository.findAll();
+    }
+
+
+
     @Transactional
     public DocumentDTO saveDocument(MultipartFile file) throws IOException{
 
@@ -114,4 +123,5 @@ public class DocumentService {
 //            throw new IllegalArgumentException("지원하지 않는 파일 형식입니다: " + filePath);
 //        }
     }
+
 }

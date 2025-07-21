@@ -41,11 +41,19 @@ function DocumentUploadForm() {
       navigate(0);
     }
 
+    const onClickDocumentListPageHandler = () =>{
+      navigate(`/document/list`);
+    }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" name="file" onChange={handleChangeFile}/>
-      <button type="submit" onClick={refreshPage}>파일 저장</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <input type="file" name="file" onChange={handleChangeFile}/>
+        <button type="submit" onClick={refreshPage}>파일 저장</button>
+      </form>
+      <button type="submit" onClick={onClickDocumentListPageHandler}>문서 리스트 바로가기</button>
+    </>
+
   )
 }
 

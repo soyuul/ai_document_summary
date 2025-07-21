@@ -3,7 +3,7 @@ import { POST_SUMMARY } from "../modules/SummaryModule";
 const prefix = `http://${process.env.REACT_APP_RESTAPI_IP}:8080`;
 
 export const callSaveSummary = formData =>{
-    let requestURL = `${prefix}/summary/insert`;
+    let requestURL = `${prefix}/summary`;
     console.log('[callSaveSummaryAPI] requestURL : ', requestURL);
 
     return async (dispatch, getState) =>{
