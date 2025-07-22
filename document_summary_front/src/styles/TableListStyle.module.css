@@ -1,0 +1,77 @@
+.listBox{
+    margin: 50px auto;
+    width: 1400px;
+}
+
+.titleBox{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tableBox, .summaryBox{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+.tableBox thead tr, .summaryBox thead tr{
+    background-color: #f5f5f5;
+}
+
+.tableBox thead tr th, .summaryBox thead tr th{
+    padding: 12px;
+    border-bottom: 2px solid #ccc;
+    text-align: left;
+}
+
+.tableBox tbody tr, .summaryBox tbody tr{
+    border-bottom: 1px solid #ddd;
+}
+
+.tableBox tbody td, .summaryBox tbody td{
+    padding: 10px;
+    text-align: left;
+}
+
+tbody tr td:nth-child(4){
+    text-align: center;
+}
+
+/* documentList */
+.tableBox thead tr th:first-child{
+    width: 300px;
+}
+
+.tableBox thead tr th:nth-child(2){
+    width: 720px;
+}
+
+.tableBox thead tr th:nth-child(3){
+    width: 250px;
+}
+
+
+/* summaryList table */
+.summaryBox thead tr th:first-child{
+    width: 150px;
+}
+
+.summaryBox thead tr th:nth-child(2){
+    width: 840px;
+}
+
+.summaryBox thead tr th:nth-child(3){
+    width: 250px;
+}
+
+/* .summaryBox tbody tr td:nth-child(2){ */
+.lineClamp{
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 최대 줄 수 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: inherit;
+    text-overflow: ellipsis;
+    line-height: 1.55em;
+    max-height: calc(1.4em * 4);
+}

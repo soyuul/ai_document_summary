@@ -55,9 +55,9 @@ public class OpenAIService {
             String prompt;
 
             if (keyword != null && !keyword.trim().isEmpty()) {
-                prompt = String.format("다음 문서에서 '%s'와 관련된 내용만 200자 이내로 요약해줘:\n%s", keyword, text);
+                prompt = String.format("다음 문서에서 '%s'와 관련된 내용만 100자 이내로 요약해줘:\n%s", keyword, text);
             } else {
-                prompt = "다음 문서를 200자 이내로 요약해줘:\n" + text;
+                prompt = "다음 문서를 100자 이내로 요약해줘:\n" + text;
             }
 
             /*

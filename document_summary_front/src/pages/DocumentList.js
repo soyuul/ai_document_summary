@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { callDocumentListApi } from '../apis/DocumentAPICalls';
 import SummaryInput from '../components/common/summary/SummaryInput';
-import docStyle from '../styles/DocumentListStyle.module.css';
+import listStyle from '../styles/TableListStyle.module.css';
 import pagiNation from '../styles/Pagination.module.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,9 +24,9 @@ function DocumentList() {
   const postsPerPage = 10;
 
   // 현재 페이지에 표시할 게시글 계산
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = doc.slice(indexOfFirstPost, indexOfLastPost);
+  const indexOfLastList = currentPage * postsPerPage;
+  const indexOfFirstList = indexOfLastList - postsPerPage;
+  const currentList = doc.slice(indexOfFirstList, indexOfLastList);
 
   // 페이지 번호 버튼 생성
   const totalPages = Math.ceil(doc.length / postsPerPage);
@@ -38,10 +38,10 @@ function DocumentList() {
   }, [dispatch]);
 
   useEffect(()=>{
-        if(Array.isArray(documentList)){
-          setDoc(documentList)
-        }
-    },[documentList]);
+      if(Array.isArray(documentList)){
+        setDoc(documentList)
+      }
+  },[documentList]);
 
 
   const handleCheckboxChange = (documentId) =>{
@@ -53,16 +53,17 @@ function DocumentList() {
     navigate(`/summary/list`);
   }
 
+
   return (
-    <div className={docStyle.listBox}>
-      <div className={docStyle.titleBox}>
+    <div className={listStyle.listBox}>
+      <div className={listStyle.titleBox}>
         <h2>문서 목록</h2>
         <div>
           <SummaryInput/>
           <button type="submit" onClick={onClickSummaryListPageHandler}>요약된 문서 보기</button>
         </div>
       </div>
-      <table className={docStyle.tableBox}>
+      <table className={listStyle.tableBox}>
         <thead>
           <tr>
             <th>문서 이름</th>
@@ -72,8 +73,8 @@ function DocumentList() {
           </tr>
         </thead>
         <tbody>
-        {currentPosts && currentPosts.length > 0 ? (
-          currentPosts.map((doc) => (
+        {currentList && currentList.length > 0 ? (
+          currentList.map((doc) => (
             <tr key={doc.documentId}>
               <td>{doc.documentTitle}</td>
               <td>{doc.filePath}</td>
