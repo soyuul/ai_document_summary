@@ -6,6 +6,7 @@
     background-color: #fff;
     box-shadow: 5px 5px 5px 5px #a4a8bd;
     border-radius: 30px;
+    position: relative;
 }
 
 .formBox{
@@ -50,7 +51,12 @@
 
 .btnBox{
     display: flex;
-    justify-content: space-between;
-    width: 500px;
-    margin: 20px auto;
+    flex-direction: column;
+    position: absolute;
+    bottom: 115px;
+    right: 25px;
+}
+
+.btnBox button:first-child{
+    margin-bottom: 5px;
 }
