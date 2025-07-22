@@ -67,10 +67,10 @@ function DocumentUploadForm() {
 
       <div className={docStyle.btnBox}>
         <button
-        className={btnStyle}
+        className={btnStyle.btnNonColor}
         type="submit" onClick={refreshPage}>파일 저장</button>
         <button 
-        className={btnStyle}
+        className={btnStyle.btnColor}
         type="submit" onClick={onClickDocumentListPageHandler}>문서 저장소</button>
       </div>
     </div>

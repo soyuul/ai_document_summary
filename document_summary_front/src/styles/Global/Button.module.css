@@ -1,0 +1,29 @@
+.btnNonColor, .btnColor{
+    width: 110px;
+    height: 50px;
+    border-radius: 10px;
+}
+
+.btnNonColor{
+    background-color: #fff;
+    border: 2px solid #a4a8bd;
+    color: #6c708c;
+}
+
+.nonColor:hover{
+    border: none;
+    color: #fff;
+    background-color: #a4a8bd;
+}
+
+.btnColor{
+    background-color: #a4a8bd;
+    color: #fff;
+}
+
+.btnColor:hover{
+    background-color: #fff;
+    border: 2px solid #a4a8bd;
+    color: #6c708c;
+    font-weight: 500;
+}
