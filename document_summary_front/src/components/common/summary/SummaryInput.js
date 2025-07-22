@@ -1,10 +1,7 @@
-import axios from 'axios';
-import React, { useState } from 'react'
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { callSaveSummary } from '../../../apis/SummaryAPICalls';
 
 function SummaryInput() {
-  console.log("키워드 입력");
 
   const dispatch = useDispatch();
   

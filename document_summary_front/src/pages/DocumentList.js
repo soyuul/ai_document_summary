@@ -4,11 +4,13 @@ import { callDocumentListApi } from '../apis/DocumentAPICalls';
 import SummaryInput from '../components/common/summary/SummaryInput';
 import docStyle from '../styles/DocumentListStyle.module.css';
 import pagiNation from '../styles/Pagination.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function DocumentList() {
   console.log("문서 전체 리스트 페이지");
   
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const documentList = useSelector(state => state.documentReducer.documentList);
   console.log("documentList data : ", documentList);
   
@@ -41,18 +43,24 @@ function DocumentList() {
         }
     },[documentList]);
 
+
   const handleCheckboxChange = (documentId) =>{
     setCheckedId(documentId);
   };
-
   console.log("문서 id: ", checkedId);
 
+  const onClickSummaryListPageHandler = () =>{
+    navigate(`/summary/list`);
+  }
 
   return (
     <div className={docStyle.listBox}>
       <div className={docStyle.titleBox}>
         <h2>문서 목록</h2>
-        <SummaryInput/>
+        <div>
+          <SummaryInput/>
+          <button type="submit" onClick={onClickSummaryListPageHandler}>요약된 문서 보기</button>
+        </div>
       </div>
       <table className={docStyle.tableBox}>
         <thead>
