@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { callDocumentListApi } from '../apis/DocumentAPICalls';
 import SummaryInput from '../components/common/summary/SummaryInput';
-import listStyle from '../styles/TableListStyle.module.css';
-import pagiNation from '../styles/Pagination.module.css';
+import listStyle from '../styles/common/TableListStyle.module.css';
+import pagiNation from '../styles/common/Pagination.module.css';
 import { useNavigate } from 'react-router-dom';
 
 function DocumentList() {

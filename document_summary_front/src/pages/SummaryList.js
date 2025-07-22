@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { callSummaryListApi } from '../apis/SummaryAPICalls';
-import listStyle from '../styles/TableListStyle.module.css';
-import pagiNation from '../styles/Pagination.module.css';
+import listStyle from '../styles/common/TableListStyle.module.css';
+import pagiNation from '../styles/common/Pagination.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
 

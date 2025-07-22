@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { callSaveDocumentApi } from '../../../apis/DocumentAPICalls';
 import { useNavigate } from 'react-router-dom';
+import docStyle from '../../../styles/DocUploadForm.module.css';
+import btnStyle from '../../../styles/Global/Button.module.css';
 
 function DocumentUploadForm() {
   const dispatch = useDispatch();
@@ -9,11 +11,16 @@ function DocumentUploadForm() {
 
   // 파일 업로드용 state => 기본값 null
   const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState("첨부파일");
 
   // 파일의 변경을 알려주는 이벤트 함수
   const handleChangeFile = e =>{
     console.log("파일 선택? : ", e.target.files[0]);
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    if(selectedFile){
+      setFile(selectedFile);
+      setFileName(selectedFile.name);
+    }
   }
 
   // 페이지를 이동시키는 이벤트 함수
@@ -46,15 +53,33 @@ function DocumentUploadForm() {
     }
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input type="file" name="file" onChange={handleChangeFile}/>
-        <button type="submit" onClick={refreshPage}>파일 저장</button>
+    <div className={docStyle.docBox}>
+      <form
+      className={docStyle.formBox}
+      onSubmit={handleSubmit}>
+        <div className={docStyle.fileBox}>
+          <input className={docStyle.uploadName} value={fileName} placeholder="첨부파일" disabled/>
+          <label for="file">파일선택</label> 
+          <input type="file" id="file"
+          onChange={handleChangeFile}/>
+        </div>
       </form>
-      <button type="submit" onClick={onClickDocumentListPageHandler}>문서 리스트 바로가기</button>
-    </>
+
+      <div className={docStyle.btnBox}>
+        <button
+        className={btnStyle}
+        type="submit" onClick={refreshPage}>파일 저장</button>
+        <button 
+        className={btnStyle}
+        type="submit" onClick={onClickDocumentListPageHandler}>문서 저장소</button>
+      </div>
+    </div>
+
+    
 
   )
+
+
 }
 
 export default DocumentUploadForm;

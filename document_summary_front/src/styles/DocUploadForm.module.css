@@ -1,0 +1,57 @@
+.docBox{
+    width: 550px;
+    height: 400px;
+    margin: 9% auto;
+    padding: 110px 0;
+    background-color: #fff;
+    box-shadow: 5px 5px 5px 5px #a4a8bd;
+    border-radius: 30px;
+}
+
+.formBox{
+    width: 500px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 10px;
+    border: 2px solid #a4a8bd;
+}
+
+.fileBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fileBox input {
+    padding: 0 10px;
+    cursor: not-allowed;
+    background-color: #fff;
+}
+
+.fileBox label {
+    height: 52px;
+    display: inline-block;
+    padding: 15px 20px;
+    color: #fff;
+    background-color: #a4a8bd;
+    border-radius: 0 6px 6px 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.fileBox input[type="file"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0;
+}
+
+.btnBox{
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin: 20px auto;
+    background-color: red;
+}
