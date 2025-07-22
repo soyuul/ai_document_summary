@@ -17,7 +17,7 @@ function SummaryList() {
   const [sum, setSum] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5;
+  const postsPerPage = 4;
     
   // 현재 페이지에 표시할 게시글 계산
   const indexOfLastList = currentPage * postsPerPage;
