@@ -1,16 +1,18 @@
 .listBox{
-    margin: 50px auto;
     width: 1400px;
+    margin: 80px auto;
 }
 
 .titleBox{
     display: flex;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .tableBox, .summaryBox{
     width: 100%;
     border-collapse: collapse;
+    background-color: #fff;
 }
 
 

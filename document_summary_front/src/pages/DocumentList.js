@@ -21,7 +21,7 @@ function DocumentList() {
   const [doc, setDoc] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 10;
+  const postsPerPage = 7;
 
   // 현재 페이지에 표시할 게시글 계산
   const indexOfLastList = currentPage * postsPerPage;
@@ -103,8 +103,12 @@ function DocumentList() {
       </table>
 
       <div className={pagiNation.pagination}>
-        {pageNumbers.map(number => (
-          <button key={number} onClick={() => setCurrentPage(number)}>
+        {pageNumbers.map((number) => (
+          <button
+            key={number}
+            onClick={() => setCurrentPage(number)}
+            className={`${pagiNation.pageButton} ${currentPage === number ? pagiNation.pageButtonActive : ''}`}
+          >
             {number}
           </button>
         ))}
