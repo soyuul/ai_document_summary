@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { callDocumentListApi } from '../apis/DocumentAPICalls';
+import { useNavigate } from 'react-router-dom';
 import SummaryInput from '../components/common/summary/SummaryInput';
 import listStyle from '../styles/common/TableListStyle.module.css';
+import docListStyle from '../styles/DocList.module.css';
 import pagiNation from '../styles/common/Pagination.module.css';
-import { useNavigate } from 'react-router-dom';
+
 
 function DocumentList() {
   console.log("문서 전체 리스트 페이지");
@@ -58,7 +60,7 @@ function DocumentList() {
     <div className={listStyle.listBox}>
       <div className={listStyle.titleBox}>
         <h2>문서 목록</h2>
-        <div>
+        <div className={docListStyle.title}>
           <SummaryInput/>
           <button type="submit" onClick={onClickSummaryListPageHandler}>요약된 문서 보기</button>
         </div>

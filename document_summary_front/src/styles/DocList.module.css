@@ -1,0 +1,5 @@
+.title{
+    width: 930px;
+    display: flex;
+    justify-content: space-between;
+}
