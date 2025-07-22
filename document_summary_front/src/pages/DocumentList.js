@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { callDocumentListApi } from '../apis/DocumentAPICalls';
+import SummaryInput from '../components/common/summary/SummaryInput';
 import docStyle from '../styles/DocumentListStyle.module.css';
 import pagiNation from '../styles/Pagination.module.css';
 
@@ -51,7 +52,7 @@ function DocumentList() {
     <div className={docStyle.listBox}>
       <div className={docStyle.titleBox}>
         <h2>문서 목록</h2>
-        <button>해당 문서 요약하기</button>
+        <SummaryInput/>
       </div>
       <table className={docStyle.tableBox}>
         <thead>
