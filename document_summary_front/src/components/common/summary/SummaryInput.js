@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import sumInputStyle from '../../../styles/SummaryInput.module.css';
+import btnStyle from '../../../styles/Global/Button.module.css';
 
 function SummaryInput() {
 
@@ -17,14 +19,16 @@ function SummaryInput() {
 
    
   return (
-    <form>
+    <form className={sumInputStyle.formBox}>
       <input
         type="text"
         value={keyword}
         onChange={handleChangeKeyword}
         placeholder="키워드 입력"
       />
-      <button type="submit">요약 저장</button>
+      <button
+      className={btnStyle.btnInput}
+      type="submit">요약 저장</button>
     </form>
   );
 };

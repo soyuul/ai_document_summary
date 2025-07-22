@@ -9,6 +9,10 @@
     margin-bottom: 20px;
 }
 
+.titleBox h2{
+    color: #878fb0;
+}
+
 .tableBox, .summaryBox{
     width: 100%;
     border-collapse: collapse;
@@ -49,7 +53,7 @@ tbody tr td:nth-child(4){
 }
 
 .tableBox thead tr th:nth-child(3){
-    width: 250px;
+    width: 300px;
 }
 
 

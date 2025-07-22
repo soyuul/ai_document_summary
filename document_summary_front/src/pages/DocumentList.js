@@ -21,7 +21,7 @@ function DocumentList() {
   const [doc, setDoc] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 7;
+  const postsPerPage = 10;
 
   // 현재 페이지에 표시할 게시글 계산
   const indexOfLastList = currentPage * postsPerPage;

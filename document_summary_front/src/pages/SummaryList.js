@@ -83,8 +83,12 @@ function SummaryList() {
       </table>
 
       <div className={pagiNation.pagination}>
-        {pageNumbers.map(number => (
-          <button key={number} onClick={() => setCurrentPage(number)}>
+        {pageNumbers.map((number) => (
+          <button
+            key={number}
+            onClick={() => setCurrentPage(number)}
+            className={`${pagiNation.pageButton} ${currentPage === number ? pagiNation.pageButtonActive : ''}`}
+          >
             {number}
           </button>
         ))}

@@ -27,3 +27,12 @@
     color: #6c708c;
     font-weight: 500;
 }
+
+.btnInput{
+    width: 100px;
+    height: 30px;
+    /* padding: ; */
+    border-radius: 0 10px 10px 0;
+    background-color: #a4a8bd;
+    color: #fff;
+}
