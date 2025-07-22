@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { Provider } from 'react-redux';
 import store from './Store';
+import "./styles/Global/Global.css";
 
 // Provider : React 앱에 store를 주입해주는 컴포넌트
 // => Redux 상태(store)를 전 컴포넌트에 연결시켜준다

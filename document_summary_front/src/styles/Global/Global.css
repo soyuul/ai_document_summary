@@ -1,0 +1,69 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+@font-face {
+	font-family: "Pretendard";
+	src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+  unicode-range: U+1100-11FF, U+AC00-D7AF; /* Korean Hangul */
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	border: 0px solid silver;
+}
+
+img {
+	width: 100%;
+}
+
+body {
+	font-family: "Pretendard", "Montserrat", sans-serf;
+	/* background-color: var(--main-bg-color); */
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+h1 {
+	font-size: 45px;
+}
+
+h2 {
+	font-size: 34px;
+}
+
+h3 {
+	font-size: 24px;
+	font-weight: 300;
+}
+
+h4 {
+	font-size: 20px;
+}
+
+h5 {
+	font-size: 12px;
+}
+
+p {
+	font-size: 18px;
+	margin: 0;
+}
+
+button {
+	cursor: pointer;
+}
+
+:root {
+	/* 폰트 패밀리 */
+	--font-family: "Pretendard", "Montserrat", sans-serif;
+}
