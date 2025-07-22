@@ -6,7 +6,7 @@ import SummaryInput from '../components/common/summary/SummaryInput';
 import listStyle from '../styles/common/TableListStyle.module.css';
 import docListStyle from '../styles/DocList.module.css';
 import pagiNation from '../styles/common/Pagination.module.css';
-
+import btnStyle from '../styles/Global/Button.module.css';
 
 function DocumentList() {
   console.log("문서 전체 리스트 페이지");
@@ -62,7 +62,9 @@ function DocumentList() {
         <h2>문서 목록</h2>
         <div className={docListStyle.title}>
           <SummaryInput/>
-          <button type="submit" onClick={onClickSummaryListPageHandler}>요약된 문서 보기</button>
+          <button 
+          className={btnStyle.btnNonColor}
+          type="submit" onClick={onClickSummaryListPageHandler}>요약된 문서 보기</button>
         </div>
       </div>
       <table className={listStyle.tableBox}>
