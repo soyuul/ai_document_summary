@@ -17,7 +17,7 @@ function DocumentList() {
   console.log("documentList data : ", documentList);
   
   // 체크리스트 상태
-  const [checkedId, setCheckedId] = useState([]);
+  const [checkedId, setCheckedId] = useState(null);
 
   // 페이지네이션 상태
   const [doc, setDoc] = useState([]);
@@ -61,7 +61,7 @@ function DocumentList() {
       <div className={listStyle.titleBox}>
         <h2>문서 목록</h2>
         <div className={docListStyle.title}>
-          <SummaryInput/>
+          <SummaryInput documentId={checkedId}/>
           <button 
           className={btnStyle.btnNonColor}
           type="submit" onClick={onClickSummaryListPageHandler}>요약된 문서 보기</button>

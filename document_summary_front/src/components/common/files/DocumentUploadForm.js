@@ -41,11 +41,7 @@ function DocumentUploadForm() {
         dispatch(callSaveDocumentApi(formData));
 
         alert("파일이 등록되었습니다.");
-
-    }
-
-    const refreshPage = () =>{
-      navigate(0);
+        navigate(0);
     }
 
     const onClickDocumentListPageHandler = () =>{
@@ -58,20 +54,29 @@ function DocumentUploadForm() {
       className={docStyle.formBox}
       onSubmit={handleSubmit}>
         <div className={docStyle.fileBox}>
-          <input className={docStyle.uploadName} value={fileName} placeholder="첨부파일" disabled/>
-          <label for="file">파일선택</label> 
-          <input type="file" id="file"
+
+          <input 
+          className={docStyle.uploadName} 
+          value={fileName} 
+          placeholder="첨부파일" 
+          disabled/>
+
+          <label htmlFor="file">파일선택</label> 
+
+          <input type="file" id="file" name="file"
           onChange={handleChangeFile}/>
         </div>
+
+        <button
+        className={btnStyle.btnNonColor}
+        style={{position: "absolute", bottom: "175px", right: "25px"}}
+        type="submit">파일 저장</button>
       </form>
 
       <div className={docStyle.btnBox}>
-        <button
-        className={btnStyle.btnNonColor}
-        type="submit" onClick={refreshPage}>파일 저장</button>
         <button 
         className={btnStyle.btnColor}
-        type="submit" onClick={onClickDocumentListPageHandler}>문서 저장소</button>
+        type="button" onClick={onClickDocumentListPageHandler}>문서 저장소</button>
       </div>
     </div>
 

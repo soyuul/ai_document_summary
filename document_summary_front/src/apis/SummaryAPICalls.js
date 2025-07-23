@@ -31,7 +31,7 @@ export const callSummaryListApi = () =>{
 }
 
 // 키워드로 요약 or 문서 전체 요약
-export const callSaveSummary = formData =>{
+export const callSaveSummaryApi = formData =>{
     let requestURL = `${prefix}/summary`;
     console.log('[callSaveSummaryAPI] requestURL : ', requestURL);
 

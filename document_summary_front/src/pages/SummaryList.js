@@ -59,9 +59,9 @@ function SummaryList() {
           currentList.map((sum) => (
             <tr key={sum.summaryId}>
               <td>{sum.keyword}</td>
-              <div className={listStyle.lineClamp}>
-                <td>{sum.summaryContent}</td>
-              </div>
+              <td className={listStyle.lineClamp}>
+                <div>{sum.summaryContent}</div>
+              </td>
               <td>
                 {Array.isArray(sum.summaryCreatedAt)
                   ? sum.summaryCreatedAt.join("-")

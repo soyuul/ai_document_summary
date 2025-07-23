@@ -5,6 +5,8 @@ import com.soyuul.documentsummary.document.repository.DocumentRepository;
 import com.soyuul.documentsummary.entity.document.TblDocument;
 import com.soyuul.documentsummary.summary.dto.SummaryDTO;
 import com.soyuul.documentsummary.util.FileUploadUtils;
+import com.soyuul.documentsummary.util.PdfUtils;
+import com.soyuul.documentsummary.util.TxtUtils;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -101,27 +103,24 @@ public class DocumentService {
                 .orElseThrow(() -> new IllegalArgumentException(("해당 문서를 찾을 수 없습니다. ID: "+ documentId)));
     }
 
-    public String loadTextByDocument(TblDocument document){
+    public String loadTextByDocument(TblDocument document) throws IOException {
 
-//        파일 경로 읽기
-        Path path = Paths.get(FILE_DIR, document.getFilePath());
+        String filePath = document.getFilePath();
+        Path fullPath = Paths.get(FILE_DIR, filePath);
 
-//        파일에서 텍스트 읽기
-        try{
-            return Files.readString(path, StandardCharsets.UTF_8);
-        }catch (IOException e){
-            throw new RuntimeException("문서 파일을 읽는데 실패했습니다. 경로: " + path, e);
+        if (filePath.endsWith(".pdf")) {
+            return PdfUtils.extractTextFromPdf(fullPath);
+        } else if (filePath.endsWith(".txt")) {
+            return TxtUtils.extractTextFromTxt(fullPath);
+        } else {
+            // 기본 처리 시도: UTF-8 로 일반 텍스트로 읽기 (예외 처리 가능)
+            try {
+                return Files.readString(fullPath, StandardCharsets.UTF_8);
+            } catch (IOException e) {
+                throw new RuntimeException("문서 파일을 읽는데 실패했습니다. 경로: " + fullPath, e);
+            }
         }
-
-//        String filePath = document.getFilePath();
-//
-//        if (filePath.endsWith(".pdf")) {
-//            return PdfUtils.extractTextFromPdf(Paths.get(filePath));
-//        } else if (filePath.endsWith(".txt")) {
-//            return TxtUtils.extractTextFromTxt(Paths.get(filePath));
-//        } else {
-//            throw new IllegalArgumentException("지원하지 않는 파일 형식입니다: " + filePath);
-//        }
     }
+
 
 }

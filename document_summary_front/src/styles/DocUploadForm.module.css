@@ -13,14 +13,14 @@
     width: 500px;
     height: auto;
     margin: 0 auto;
-    border-radius: 10px;
-    border: 2px solid #a4a8bd;
 }
 
 .fileBox{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border-radius: 10px;
+    border: 2px solid #a4a8bd;
 }
 
 .fileBox input {
