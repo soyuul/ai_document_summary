@@ -59,14 +59,18 @@ tbody tr td:nth-child(4){
 
 /* summaryList table */
 .summaryBox thead tr th:first-child{
-    width: 150px;
+    width: 100px;
 }
 
 .summaryBox thead tr th:nth-child(2){
-    width: 840px;
+    width: 200px;
 }
 
 .summaryBox thead tr th:nth-child(3){
+    width: 840px;
+}
+
+.summaryBox thead tr th:nth-child(4){
     width: 250px;
 }
 
