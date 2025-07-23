@@ -23,7 +23,7 @@ function SummaryDownload({filename}) {
 
   return (
     <div onClick={handleDownload} style={{cursor: 'pointer'}}>
-      <FontAwesomeIcon icon={faFileArrowDown}/>
+      <FontAwesomeIcon icon={faFileArrowDown} style={{color: '#676c84ff'}}/>
     </div>
   )
 }
