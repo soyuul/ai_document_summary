@@ -5,6 +5,7 @@ import listStyle from '../styles/common/TableListStyle.module.css';
 import pagiNation from '../styles/common/Pagination.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
+import SummaryDownload from '../components/common/summary/SummaryDownload';
 
 function SummaryList() {
   console.log("요약된 문서 전체 리스트 페이지");
@@ -40,38 +41,45 @@ function SummaryList() {
   },[summaryList]);  
 
 
-  return (
-    <div className={listStyle.listBox}>
-      <div className={listStyle.titleBox}>
-        <h2>요약된 문서 목록</h2>
-      </div>
-      <table className={listStyle.summaryBox}>
-        <thead>
-          <tr>
-            <th>키워드</th>
-            <th>요약 내용</th>
-            <th>요약 날짜</th>
-            <th>다운로드</th>
-          </tr>
-        </thead>
-        <tbody>
+ return (
+  <div className={listStyle.listBox}>
+    <div className={listStyle.titleBox}>
+      <h2>요약된 문서 목록</h2>
+    </div>
+
+    <table className={listStyle.summaryBox}>
+      <thead>
+        <tr>
+          <th>키워드</th>
+          <th>문서 제목</th>
+          <th>요약 내용</th>
+          <th>요약 날짜</th>
+          <th>다운로드</th>
+        </tr>
+      </thead>
+      <tbody>
         {currentList && currentList.length > 0 ? (
-          currentList.map((sum) => (
-            <tr key={sum.summaryId}>
-              <td>{sum.keyword}</td>
-              <td className={listStyle.lineClamp}>
-                <div>{sum.summaryContent}</div>
-              </td>
-              <td>
-                {Array.isArray(sum.summaryCreatedAt)
-                  ? sum.summaryCreatedAt.join("-")
-                  : sum.summaryCreatedAt}
-              </td>
-              <td>
-               <FontAwesomeIcon icon={faFileArrowDown} />
-              </td>
-            </tr>
-          ))
+          currentList.map((sum) => {
+            console.log("sum 구조확인 : ", sum); // ✅ JSX 바깥에서 로그 출력
+
+            return (
+              <tr key={sum.summaryId}>
+                <td>{sum.keyword}</td>
+                <td>{sum.documentTitle}</td>
+                <td className={listStyle.lineClamp}>
+                  <div>{sum.summaryContent}</div>
+                </td>
+                <td>
+                  {Array.isArray(sum.summaryCreatedAt)
+                    ? sum.summaryCreatedAt.join("-")
+                    : sum.summaryCreatedAt}
+                </td>
+                <td>
+                  <SummaryDownload filename={sum.savedFileName} />
+                </td>
+              </tr>
+            );
+          })
         ) : (
           <tr>
             <td colSpan="4" style={{ textAlign: "center", padding: "20px" }}>
@@ -80,21 +88,23 @@ function SummaryList() {
           </tr>
         )}
       </tbody>
-      </table>
+    </table>
 
-      <div className={pagiNation.pagination}>
-        {pageNumbers.map((number) => (
-          <button
-            key={number}
-            onClick={() => setCurrentPage(number)}
-            className={`${pagiNation.pageButton} ${currentPage === number ? pagiNation.pageButtonActive : ''}`}
-          >
-            {number}
-          </button>
-        ))}
-      </div>
+    <div className={pagiNation.pagination}>
+      {pageNumbers.map((number) => (
+        <button
+          key={number}
+          onClick={() => setCurrentPage(number)}
+          className={`${pagiNation.pageButton} ${
+            currentPage === number ? pagiNation.pageButtonActive : ""
+          }`}
+        >
+          {number}
+        </button>
+      ))}
     </div>
-  );
-}
+  </div>
+);
 
+}
 export default SummaryList;

@@ -2,14 +2,17 @@ import { createActions, handleActions } from "redux-actions";
 
 const initialState = {
     summaryList: [],
+    download: null,
     saveSummary: null,
 }
 
 export const GET_SUMMARY_LIST = 'summary/GET_SUMMARY_LIST';
+export const GET_DOWNLOAD_SUMMARY = 'summary/GET_DOWNLOAD_SUMMARY';
 export const POST_SUMMARY = 'summary/POST_SUMMARY';
 
 const actions = createActions({
     [GET_SUMMARY_LIST]: () => {},
+    [GET_DOWNLOAD_SUMMARY]: () => {},
     [POST_SUMMARY]: () => {},
 });
 
@@ -18,6 +21,10 @@ const summaryReducer = handleActions({
     [GET_SUMMARY_LIST]: (state, {payload}) =>({
         ...state,
         summaryList: payload
+    }),
+    [GET_DOWNLOAD_SUMMARY]: (state, {payload}) =>({
+        ...state,
+        download: payload
     }),
 
     // POST_SUMMARY 액션이 발생했을 때

@@ -52,17 +52,27 @@ public class SummaryService {
 
         List<TblSummary> summaryList = summaryRepository.findAll();
 
-        /*
-         * 단일 객체를 변환하는 메서드
-         * */
-//        SummaryDTO res = modelMapper.map(summaryList, SummaryDTO.class);
-
         List<SummaryDTO> res = summaryList.stream()
-                .map(summary -> modelMapper.map(summary, SummaryDTO.class))
+                .map(summary -> {
+                    TblDocument document = summary.getDocument();
+
+                    SummaryDTO dto = new SummaryDTO();
+                    dto.setSummaryId(summary.getSummaryId());
+                    dto.setDocumentId(document.getDocumentId());
+                    dto.setDocumentTitle(document.getDocumentTitle());
+                    dto.setSavedFileName(document.getFilePath()); // ✅ 여기!
+                    dto.setKeyword(summary.getKeyword());
+                    dto.setSummaryContent(summary.getSummaryContent());
+                    dto.setSummaryCreatedAt(summary.getSummaryCreatedAt());
+                    dto.setSectionReference(summary.getSectionReference());
+
+                    return dto;
+                })
                 .toList();
 
         return res;
     }
+
 
 
     public Object findSummaryDetail(Long summaryId) {
